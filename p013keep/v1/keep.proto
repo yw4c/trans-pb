@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+import "p010user/v1/user.proto";
+
+package keep;
+option go_package = "github.com/yw4c/trans-pb/p013keep/v1";
+
+service KeepService {
+    rpc Store (StoreRequest) returns (StoreReply) {}
+    rpc List (ListRequest) returns (ListReply) {}
+    rpc Delete (DeleteRequest) returns (DeleteReply) {}
+    rpc Score (ScoreRequest) returns (ScoreReply) {}
+}
+
+message Error {
+    int32 Code = 1;
+    string Message = 2;
+}
+
+message Pagination {
+    int32 CurrentPage = 1;
+    int32 LastPage = 2;
+    int32 PerPage = 3;
+    int32 Total = 4;
+    int32 From = 5;
+    int32 To = 6;
+}
+
+message Keep {
+    int32 Id=1;
+    string En=2;
+    string Native=3;
+    int32 EnScore = 4;
+    int32 NativeScore = 5;
+}
+
+message StoreRequest {
+    string En = 1;
+    string Native = 2;
+    user.UserData UserData=3;
+}
+
+message StoreReply {
+    int32 KeepId=1;
+    Error Error =2;
+}
+
+message ListRequest {
+    int32 Page = 1;
+    int32 PerPage = 2;
+    int32 RandomGroup = 3;
+    int32 Score = 4;
+    bool IsScoreNative = 5;
+    user.UserData UserData= 6;
+}
+
+message ListReply {
+    Pagination Pagination = 1;
+    repeated Keep List = 2;
+    Error Error =3;
+}
+
+message DeleteRequest {
+    int32 KeepId = 1;
+}
+
+message DeleteReply {
+    int32 KeepId = 1;
+    Error Error =2;
+}
+
+message ScoreRequest {
+    int32 KeepId = 1;
+    int32 Score = 2;
+    bool IsScoreNative = 3;
+}
+
+message ScoreReply {
+    int32 KeepId = 1;
+    bool IsScoreNative = 2;
+    int32 OriginScore = 3;
+    int32 Score = 4;
+
+}

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "p010user/v1/user.proto";
+import "github.com/yw4c/trans-pb/p010user/v1/user.proto";
 
 package keep;
 option go_package = "github.com/yw4c/trans-pb/p013keep/v1";
@@ -49,7 +49,7 @@ message ListRequest {
     int32 Page = 1;
     int32 PerPage = 2;
     int32 RandomGroup = 3;
-    int32 Score = 4;
+    repeated int32 Scores = 4;
     bool IsScoreNative = 5;
     user.UserData UserData= 6;
 }
@@ -77,8 +77,5 @@ message ScoreRequest {
 
 message ScoreReply {
     int32 KeepId = 1;
-    bool IsScoreNative = 2;
-    int32 OriginScore = 3;
-    int32 Score = 4;
-
+    Error Error =5;
 }

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "p010user/v1/user.proto";
+import "github.com/yw4c/trans-pb/p010user/v1/user.proto";
 
 package dict;
 option go_package = "github.com/yw4c/trans-pb/p012dict/v1";

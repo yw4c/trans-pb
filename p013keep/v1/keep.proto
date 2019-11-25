@@ -62,6 +62,7 @@ message ListReply {
 
 message DeleteRequest {
     int32 KeepId = 1;
+    user.UserData UserData= 2;
 }
 
 message DeleteReply {
@@ -73,6 +74,7 @@ message ScoreRequest {
     int32 KeepId = 1;
     int32 Score = 2;
     bool IsScoreNative = 3;
+    user.UserData UserData= 4;
 }
 
 message ScoreReply {

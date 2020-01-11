@@ -6,9 +6,9 @@ option go_package = "github.com/yw4c/trans-pb/p010user/v1";
 service User {
     rpc register (RegisterRequest) returns (RegisterReply) {}
     rpc login (LoginRequest) returns (LoginReply) {}
-    rpc validateRegister(RegisterValidationRequest) returns (RegisterValidationReply) {}
     rpc validateAuth(AuthValidationRequest) returns (AuthValidationReply) {}
     rpc setNativeLangRequest(SetNativeLangRequest) returns (SetNativeLangResponse) {}
+    rpc ValidateMailVerification(ValidateMailVerificationRequest) returns (ValidateMailVerificationResponse) {}
 }
 
 message Error {
@@ -38,16 +38,6 @@ message RegisterReply {
     Error Error=1;
 }
 
-///////// Register Validation //////////
-message RegisterValidationRequest {
-    string otp = 1;
-    string username = 2;
-}
-
-message RegisterValidationReply {
-    string token = 1;
-    Error Error = 2;
-}
 
 ///////// Login //////////
 
@@ -78,5 +68,13 @@ message SetNativeLangRequest {
     string NativeLang = 2;
 }
 message SetNativeLangResponse {
-    Error Error = 2;
+    Error Error = 1;
+}
+
+//////// ValidateMailVerification //////
+message ValidateMailVerificationRequest {
+    string Token = 1;
+}
+message ValidateMailVerificationResponse {
+    Error Error = 1;
 }
